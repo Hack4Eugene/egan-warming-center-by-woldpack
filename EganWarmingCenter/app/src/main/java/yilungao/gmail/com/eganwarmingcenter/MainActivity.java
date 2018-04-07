@@ -1,14 +1,18 @@
 package yilungao.gmail.com.eganwarmingcenter;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.support.design.*;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -17,13 +21,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Site.OnFragmentInteractionListener {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
     private DatabaseReference mDatabase;
     private String mUserId;
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+    Messaging messagingFragment;
+    Site site;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +45,54 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+        messagingFragment = Messaging.newInstance();
+        site = Site.newInstance();
+
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                if(position == 0) return "Site";
+                return "Messaging";
+            }
+            @Override
+            public int getCount() {
+                return 2;
+            }
+            @Override
+            public Fragment getItem(int position) {
+                if(position == 0) {
+                    return site;
+                }
+                else if(position == 1) {
+                    return messagingFragment;
+                }
+                // with only two tabs, we shouldn't get here
+                return null;
+            }
+        });
+
         if (mFirebaseUser == null) {
             // Not logged in, launch the Log In activity
             loadLogInView();
         } else {
             mUserId = mFirebaseUser.getUid();
 
-            final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
+            final ArrayAdapter<String> adapterString = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
 
 
             // Use Firebase to populate the list.
             mDatabase.child("users").child(mUserId).child("items").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    adapter.add((String) dataSnapshot.child("title").getValue());
+                    adapterString.add((String) dataSnapshot.child("title").getValue());
                 }
 
                 @Override
@@ -58,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    adapter.remove((String) dataSnapshot.child("title").getValue());
+                    adapterString.remove((String) dataSnapshot.child("title").getValue());
                 }
 
                 @Override
@@ -102,4 +146,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
