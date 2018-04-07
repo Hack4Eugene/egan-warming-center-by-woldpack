@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity implements Site.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements SiteFragment.OnFragmentInteractionListener {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -32,13 +32,20 @@ public class MainActivity extends AppCompatActivity implements Site.OnFragmentIn
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    private int userPermissons;
+
     Messaging messagingFragment;
-    Site site;
+    SiteFragment siteFragment;
+    AdminViewFragment adminViewFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userPermissons = getIntent().getIntExtra("permissions", 0);
+        Log.i("MAIN", "permissions: " + userPermissons);
+
 
         // Initialize Firebase Auth and Database Reference
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -53,31 +60,72 @@ public class MainActivity extends AppCompatActivity implements Site.OnFragmentIn
         tabLayout.setupWithViewPager(viewPager);
 
         messagingFragment = Messaging.newInstance();
-        site = Site.newInstance();
+        siteFragment = SiteFragment.newInstance();
+        adminViewFragment = AdminViewFragment.newInstance();
+        switch (userPermissons){
+            case(0):
+                viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 
-        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+                    @Override
+                    public CharSequence getPageTitle(int position) {
+                        if(position == 0) return "SiteFragment";
+                        if(position == 1) return "Messaging";
+                        return "Admin";
+                    }
+                    @Override
+                    public int getCount() {
+                        return 3;
+                    }
+                    @Override
+                    public Fragment getItem(int position) {
+                        if(position == 0) return siteFragment;
+                        else if(position == 1) return messagingFragment;
+                        else if(position == 2) return adminViewFragment;
+                        return null;
+                    }
+                });
+                break;
+            case(4):
+                viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 
-            @Override
-            public CharSequence getPageTitle(int position) {
-                if(position == 0) return "Site";
-                return "Messaging";
-            }
-            @Override
-            public int getCount() {
-                return 2;
-            }
-            @Override
-            public Fragment getItem(int position) {
-                if(position == 0) {
-                    return site;
-                }
-                else if(position == 1) {
-                    return messagingFragment;
-                }
-                // with only two tabs, we shouldn't get here
-                return null;
-            }
-        });
+                    @Override
+                    public CharSequence getPageTitle(int position) {
+                        return "Messaging";
+                    }
+                    @Override
+                    public int getCount() {
+                        return 1;
+                    }
+                    @Override
+                    public Fragment getItem(int position) {
+                        if(position == 0) return messagingFragment;
+                        return null;
+                    }
+                });
+                break;
+            default:
+                viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+
+                    @Override
+                    public CharSequence getPageTitle(int position) {
+                        if(position == 0) return "SiteFragment";
+                        return "Messaging";
+                    }
+                    @Override
+                    public int getCount() {
+                        return 2;
+                    }
+                    @Override
+                    public Fragment getItem(int position) {
+                        if(position == 0) return siteFragment;
+                        if(position == 1) return messagingFragment;
+                        return null;
+                    }
+                });
+                break;
+        }
+
+
 
         if (mFirebaseUser == null) {
             // Not logged in, launch the Log In activity

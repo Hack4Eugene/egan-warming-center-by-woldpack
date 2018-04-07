@@ -14,7 +14,7 @@ class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return Site.getInstance(position);
+        return SiteFragment.getInstance(position);
     }
 
     @Override

@@ -14,4 +14,16 @@
     <string name="add_item">Add New Item</string>
     <string name="action_logout">Logout</string>
     <string name="tab1">tab1</string>
+
+        <string-array name="permissionsTypes">
+            <item>Admin</item>
+            <item>Cahoots</item>
+            <item>Driver</item>
+            <item>Driver Coordinator</item>
+            <item>Kitchen Lead</item>
+            <item>Logistics</item>
+            <item>Shift Lead</item>
+            <item>Site Lead</item>
+        </string-array>
+
 </resources>
