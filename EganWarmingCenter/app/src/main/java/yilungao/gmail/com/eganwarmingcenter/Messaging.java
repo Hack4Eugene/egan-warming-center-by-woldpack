@@ -44,9 +44,6 @@ public class Messaging extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView = (TextView) view.findViewById(R.id.textView);
-
-
     }
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

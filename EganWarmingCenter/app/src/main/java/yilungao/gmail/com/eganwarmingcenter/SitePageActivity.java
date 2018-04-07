@@ -30,26 +30,6 @@ public class SitePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_site_page);
 
-        sitename = getIntent().getStringExtra("SITENAME");
-
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        series = new BarGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(.5, 1)
-        });
-        series.setValueDependentColor(new mValueDependentColor(capacity));
-        graph.addSeries(series);
-
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0.0);
-        graph.getViewport().setMaxX(1.0);
-
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMaxY(10.0);
-
-        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
-        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-
     }
 
     @Override
