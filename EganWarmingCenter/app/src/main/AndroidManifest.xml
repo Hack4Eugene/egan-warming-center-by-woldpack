@@ -19,6 +19,7 @@
         <activity android:name=".SitePageActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LogInActivity" />
+        <activity android:name=".Message" />
         <activity android:name=".EditMenuActivity"></activity>
     </application>
 
