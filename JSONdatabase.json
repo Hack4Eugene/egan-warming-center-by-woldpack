@@ -1,0 +1,42 @@
+{
+  "sites": {
+
+    "siteA": {
+
+      "name": "A",
+
+      "num_people": 20,
+
+      "capacity": 50,
+
+      "active": true,
+
+      "children": true,
+
+      "adult": true,
+
+      "pets": true,
+
+      "disability": true
+    },
+
+    "siteB": {
+
+      "name": "B",
+
+      "num_people": 0,
+
+      "capacity": 40,
+
+      "active": false,
+
+      "children": false,
+
+      "adult": false,
+
+      "pets": false,
+
+      "disability": false
+    }
+  }
+}
