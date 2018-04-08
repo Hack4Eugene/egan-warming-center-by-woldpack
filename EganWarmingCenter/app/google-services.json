@@ -15,22 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "986387770886-782p0jf434j0p4jieahtgl3d7jblta14.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "yilungao.gmail.com.eganwarmingcenter",
-            "certificate_hash": "5155503f59ad604f5a43586c2091aeaf97b71145"
-          }
-        },
-        {
-          "client_id": "986387770886-tv8nkt6jplp3le8tfdj2la4vf18lvp11.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "yilungao.gmail.com.eganwarmingcenter",
-            "certificate_hash": "6ca4b671e199fa0812269d9fdb19f68e1e56db11"
-          }
-        },
-        {
           "client_id": "986387770886-5v8iinnt1nv9578orrb8ecbl75srio5q.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -45,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "986387770886-5v8iinnt1nv9578orrb8ecbl75srio5q.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

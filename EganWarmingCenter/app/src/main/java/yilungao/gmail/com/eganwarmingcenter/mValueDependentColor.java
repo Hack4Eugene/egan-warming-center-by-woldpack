@@ -5,6 +5,8 @@ import android.graphics.Color;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.DataPoint;
 
+import static java.lang.Math.abs;
+
 public class mValueDependentColor implements ValueDependentColor<DataPoint> {
     private int max;
 
@@ -13,6 +15,10 @@ public class mValueDependentColor implements ValueDependentColor<DataPoint> {
     }
 
     public int get(DataPoint data) {
-        return Color.rgb((int) (255 * data.getY() / max), (int) ((255 * (max - data.getY())) / max), 0);
+        if (data.getY()/max <= 0.333333333333) {
+            return Color.rgb((int) (255 * 3 * data.getY() / max), 255, 0);
+        } else {
+            return Color.rgb(255, (int) ((255 * 3 * ((((max - data.getY()) / max)))) / 2), 0);
+        }
     }
 }

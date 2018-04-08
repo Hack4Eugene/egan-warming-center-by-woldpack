@@ -1,5 +1,6 @@
 package yilungao.gmail.com.eganwarmingcenter;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,11 +9,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+
+import java.util.ArrayList;
 
 public class SiteFragment extends Fragment {
 
@@ -20,15 +31,18 @@ public class SiteFragment extends Fragment {
     private Runnable mTimer;
     private BarGraphSeries<DataPoint> series;
     private final Handler mHandler = new Handler();
+    private DatabaseReference mDatabase;
+    private ArrayList<Site> siteArray = new ArrayList<Site>();
 
     public String sitename;
     public int num_people;
-    public int capacity = 10;
+    public int capacity;
     public boolean activated;
     public boolean children;
     public boolean adult;
     public boolean disability;
     public boolean pets;
+    public ListView siteListView;
 
     public static SiteFragment newInstance() {
         SiteFragment tabFrag = new SiteFragment();
@@ -40,9 +54,9 @@ public class SiteFragment extends Fragment {
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", position);
-        SiteFragment siteFragment = new SiteFragment();
-        siteFragment.setArguments(bundle);
-        return siteFragment;
+        SiteFragment site = new SiteFragment();
+        site.setArguments(bundle);
+        return site;
     }
 
     @Override
@@ -56,23 +70,45 @@ public class SiteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.site_layout, container, false);
 
-        GraphView graph = (GraphView) view.findViewById(R.id.graph);
-        series = new BarGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(.5, 1)
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        siteListView = view.findViewById(R.id.siteListView);
+        final SiteAdapter mAdapter = new SiteAdapter(getActivity(), siteArray);
+        siteListView.setAdapter(mAdapter);
+
+        siteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String siteID = mAdapter.getItem(i).siteID;
+
+                Intent intent = new Intent(getActivity(), SitePageActivity.class);
+                intent.putExtra("SITEID", siteID);
+                startActivity(intent);
+            }
         });
-        series.setValueDependentColor(new mValueDependentColor(capacity));
-        graph.addSeries(series);
 
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0.0);
-        graph.getViewport().setMaxX(1.0);
 
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMaxY(10.0);
+        mDatabase.child("sites").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                siteArray = new ArrayList<Site>();
+                for (DataSnapshot siteDataSnapshot: dataSnapshot.getChildren()) {
+                    Site updatedSite = new Site((String) siteDataSnapshot.getKey());
+                    updatedSite.siteName = (String) siteDataSnapshot.child("name").getValue();
+                    updatedSite.capacity = siteDataSnapshot.child("capacity").getValue(Integer.class);
+                    updatedSite.numPeople = siteDataSnapshot.child("num_people").getValue(Integer.class);
+                    siteArray.add(updatedSite);
+                }
+                mAdapter.updateData(siteArray);
+                mAdapter.notifyDataSetChanged();
+            }
 
-        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
-        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         return view;
     }
 

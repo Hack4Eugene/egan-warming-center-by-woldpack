@@ -20,18 +20,19 @@
         app:layout_constraintVertical_bias="0.199" />
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/incrementNumField"
+        android:layout_width="108dp"
+        android:layout_height="94dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/graph"
         app:layout_constraintHorizontal_bias="0.412"
@@ -40,23 +41,19 @@
         app:layout_constraintVertical_bias="0.343" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/minusBtn"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="88dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginTop="32dp"
         android:background="#00000000"
-        app:layout_constraintEnd_toStartOf="@+id/graph"
-        app:layout_constraintHorizontal_bias="0.014"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/incrementNumField"
+        app:layout_constraintTop_toBottomOf="@+id/incrementNumField"
         app:srcCompat="@drawable/minus_icon" />
 
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/plusBtn"
         android:layout_width="32dp"
         android:layout_height="29dp"
         android:layout_marginBottom="16dp"
@@ -65,10 +62,77 @@
         android:layout_marginRight="30dp"
         android:layout_marginStart="50dp"
         android:background="#00000000"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/incrementNumField"
         app:layout_constraintEnd_toStartOf="@+id/graph"
         app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/plus_icon" />
+
+    <EditText
+        android:id="@+id/Pets"
+        android:layout_width="148dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="Pets"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Adult"
+        app:layout_constraintStart_toStartOf="@+id/Adult"
+        app:layout_constraintTop_toBottomOf="@+id/Adult" />
+
+    <EditText
+        android:id="@+id/Disability"
+        android:layout_width="148dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="Disability"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Children"
+        app:layout_constraintTop_toBottomOf="@+id/Children" />
+
+    <EditText
+        android:id="@+id/Adult"
+        android:layout_width="148dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="24dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="Adult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Children"
+        app:layout_constraintTop_toBottomOf="@+id/graph" />
+
+    <EditText
+        android:id="@+id/Children"
+        android:layout_width="148dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="Children"
+        app:layout_constraintEnd_toStartOf="@+id/Adult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Adult" />
 
 </android.support.constraint.ConstraintLayout>

@@ -5,13 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LogInActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class LogInActivity extends AppCompatActivity {
 
     protected EditText emailEditText;
     protected EditText passwordEditText;
@@ -27,30 +23,10 @@ public class LogInActivity extends AppCompatActivity implements AdapterView.OnIt
     protected TextView signUpTextView;
     private FirebaseAuth mFirebaseAuth;
 
-    private int userPermissions;
-
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        userPermissions = pos;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.permissionsTypes, android.R.layout.simple_spinner_item);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
 
         // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -91,7 +67,6 @@ public class LogInActivity extends AppCompatActivity implements AdapterView.OnIt
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-                                        intent.putExtra("permissions", userPermissions);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
