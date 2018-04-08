@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Sun Apr 08 11:45:07 PDT 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\email\\Desktop\\hack4cause2\\EganWarmingCenter\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.path=classes.dex
+0.set=DEX
+count=1

@@ -1,0 +1,4 @@
+#Sun Apr 08 08:24:38 PDT 2018
+base.0=C\:\\Users\\email\\Desktop\\hack4cause2\\EganWarmingCenter\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3
+path.0=classes.dex
+renamed.0=classes.dex
