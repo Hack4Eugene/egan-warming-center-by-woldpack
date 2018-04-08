@@ -1,6 +1,5 @@
-app/app.iml
-app.iml
 .idea
+*.iml
 #.iml
 .gradle
 local.properties
