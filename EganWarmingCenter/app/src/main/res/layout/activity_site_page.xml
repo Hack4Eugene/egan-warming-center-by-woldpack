@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/plus_icon" />
 
-    <EditText
+    <TextView
         android:id="@+id/Pets"
         android:layout_width="148dp"
         android:layout_height="41dp"
@@ -79,14 +79,16 @@
         android:background="@null"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="none"
+        android:linksClickable="false"
+        android:longClickable="false"
         android:text="Pets"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/Adult"
         app:layout_constraintStart_toStartOf="@+id/Adult"
         app:layout_constraintTop_toBottomOf="@+id/Adult" />
 
-    <EditText
+    <TextView
         android:id="@+id/Disability"
         android:layout_width="148dp"
         android:layout_height="42dp"
@@ -95,13 +97,15 @@
         android:background="@null"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="none"
+        android:linksClickable="false"
+        android:longClickable="false"
         android:text="Disability"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/Children"
         app:layout_constraintTop_toBottomOf="@+id/Children" />
 
-    <EditText
+    <TextView
         android:id="@+id/Adult"
         android:layout_width="148dp"
         android:layout_height="42dp"
@@ -111,14 +115,16 @@
         android:background="@null"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="none"
+        android:linksClickable="false"
+        android:longClickable="false"
         android:text="Adult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Children"
         app:layout_constraintTop_toBottomOf="@+id/graph" />
 
-    <EditText
+    <TextView
         android:id="@+id/Children"
         android:layout_width="148dp"
         android:layout_height="42dp"
@@ -129,10 +135,13 @@
         android:background="@null"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="none"
+        android:linksClickable="false"
+        android:longClickable="false"
         android:text="Children"
         app:layout_constraintEnd_toStartOf="@+id/Adult"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Adult" />
+        app:layout_constraintTop_toTopOf="@+id/Adult"
+        tools:clickable="false" />
 
 </android.support.constraint.ConstraintLayout>

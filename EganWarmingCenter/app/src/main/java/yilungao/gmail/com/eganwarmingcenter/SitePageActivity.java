@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +26,8 @@ import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import org.w3c.dom.Text;
 
 public class SitePageActivity extends AppCompatActivity {
 
@@ -42,10 +45,10 @@ public class SitePageActivity extends AppCompatActivity {
     private ImageButton plus;
     private ImageButton minus;
     private EditText incrementField;
-    private EditText ChildrenTag;
-    private EditText AdultTag;
-    private EditText DisabilityTag;
-    private EditText PetsTag;
+    private TextView ChildrenTag;
+    private TextView AdultTag;
+    private TextView DisabilityTag;
+    private TextView PetsTag;
 
 
     @Override
@@ -94,7 +97,7 @@ public class SitePageActivity extends AppCompatActivity {
                 graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
                 graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
-                setTitle(site.siteName + ": " + site.capacity);
+                setTitle(site.siteName + ": " + site.numPeople + "/" + site.capacity);
 
                 // set tag colors
                 if (site.children) {
