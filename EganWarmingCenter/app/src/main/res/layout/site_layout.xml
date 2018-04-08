@@ -6,69 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".SitePageActivity">
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph"
-        android:layout_width="83dp"
-        android:layout_height="321dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+    <ListView
+        android:id = "@+id/siteListView"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.199" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/graph"
-        app:layout_constraintHorizontal_bias="0.412"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343" />
-
-    <ImageButton
-        android:id="@+id/imageButton9"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="32dp"
-        android:background="#00000000"
-        app:layout_constraintEnd_toStartOf="@+id/graph"
-        app:layout_constraintHorizontal_bias="0.014"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:srcCompat="@drawable/minus_icon" />
-
-    <ImageButton
-        android:id="@+id/imageButton10"
-        android:layout_width="32dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginStart="50dp"
-        android:background="#00000000"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toStartOf="@+id/graph"
-        app:layout_constraintHorizontal_bias="0.41"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/plus_icon" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

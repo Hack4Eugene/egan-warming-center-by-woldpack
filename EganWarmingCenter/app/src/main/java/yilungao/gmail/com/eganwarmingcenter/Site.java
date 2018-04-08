@@ -1,88 +1,51 @@
 package yilungao.gmail.com.eganwarmingcenter;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.series.BarGraphSeries;
-import com.jjoe64.graphview.series.DataPoint;
+public class Site implements Parcelable{
 
-public class Site extends Fragment {
-
-    int position;
-    private Runnable mTimer;
-    private BarGraphSeries<DataPoint> series;
-    private final Handler mHandler = new Handler();
-
-    public String sitename;
-    public int num_people;
-    public int capacity = 10;
+    public String siteName;
+    public int numPeople;
+    public int capacity;
     public boolean activated;
     public boolean children;
     public boolean adult;
     public boolean disability;
     public boolean pets;
+    public int expectedWalkin;
+    public String siteID;
 
-    public static Site newInstance() {
-        Site tabFrag = new Site();
-        Bundle args = new Bundle();
-        tabFrag.setArguments(args);
-        return tabFrag;
+    public Site(String siteID){
+        this.siteID = siteID;
     }
 
-    public static Fragment getInstance(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("pos", position);
-        Site site = new Site();
-        site.setArguments(bundle);
-        return site;
+    public Site(Parcel in){
+        siteName = in.readString();
+        numPeople = in.readInt();
+        capacity = in.readInt();
+    }
+    public static final Creator<Site> CREATOR = new Creator<Site>() {
+        @Override
+        public Site createFromParcel(Parcel parcel) {
+            return new Site(parcel);
+        }
+
+        @Override
+        public Site[] newArray(int i) {
+            return new Site[i];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        position = getArguments().getInt("pos");
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.site_layout, container, false);
-
-        GraphView graph = (GraphView) view.findViewById(R.id.graph);
-        series = new BarGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(.5, 1)
-        });
-        series.setValueDependentColor(new mValueDependentColor(capacity));
-        graph.addSeries(series);
-
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0.0);
-        graph.getViewport().setMaxX(1.0);
-
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMaxY(10.0);
-
-        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
-        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(siteName);
+        parcel.writeInt(numPeople);
+        parcel.writeInt(capacity);
     }
 }

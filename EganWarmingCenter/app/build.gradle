@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    
+
     defaultConfig {
         applicationId "yilungao.gmail.com.eganwarmingcenter"
         minSdkVersion 16

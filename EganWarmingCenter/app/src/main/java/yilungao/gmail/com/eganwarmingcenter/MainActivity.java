@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity implements Site.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements SiteFragment.OnFragmentInteractionListener {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements Site.OnFragmentIn
     private ViewPager viewPager;
 
     Messaging messagingFragment;
-    Site site;
+    SiteFragment siteFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements Site.OnFragmentIn
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+
+
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
@@ -53,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements Site.OnFragmentIn
         tabLayout.setupWithViewPager(viewPager);
 
         messagingFragment = Messaging.newInstance();
-        site = Site.newInstance();
+        siteFragment = SiteFragment.newInstance();
 
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 
             @Override
             public CharSequence getPageTitle(int position) {
-                if(position == 0) return "Site";
+                if(position == 0) return "SiteFragment";
                 return "Messaging";
             }
             @Override
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements Site.OnFragmentIn
             @Override
             public Fragment getItem(int position) {
                 if(position == 0) {
-                    return site;
+                    return siteFragment;
                 }
                 else if(position == 1) {
                     return messagingFragment;
