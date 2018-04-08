@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "986387770886",
+    "firebase_url": "https://eganwarmingcenter-4d9ca.firebaseio.com",
+    "project_id": "eganwarmingcenter-4d9ca",
+    "storage_bucket": "eganwarmingcenter-4d9ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986387770886:android:49abef098268afe6",
+        "android_client_info": {
+          "package_name": "yilungao.gmail.com.eganwarmingcenter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986387770886-5v8iinnt1nv9578orrb8ecbl75srio5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiqETkJjHL_mcN5n4bDuS4E1goJWewSJU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
